@@ -1,0 +1,73 @@
+GraphSAGE:
+  encoder: [7, 64, 64, 8]
+  decoder: [8, 64, 64, 4]
+
+  nb_hidden_layers: 3
+  size_hidden_layers: 64
+  batch_size: 1
+  nb_epochs: 398
+  lr: 0.001
+  max_neighbors: 64
+  bn_bool: True
+  subsampling: 32000
+  r: 0.05
+
+PointNet:
+  encoder: [7, 64, 64, 8]
+  decoder: [8, 64, 64, 4]
+
+  base_nb: 8
+  batch_size: 1
+  nb_epochs: 398
+  lr: 0.001
+  subsampling: 32000
+
+MLP:
+  encoder: [7, 64, 64, 8]
+  decoder: [8, 64, 64, 4]
+
+  nb_hidden_layers: 3
+  size_hidden_layers: 64
+  batch_size: 1
+  nb_epochs: 398
+  lr: 0.001
+  bn_bool: True
+  subsampling: 32000
+
+GUNet:
+  encoder: [7, 64, 64, 8]
+  decoder: [8, 64, 64, 4]
+
+  layer: 'SAGE'
+  pool: 'random'
+  nb_scale: 5
+  pool_ratio: [.5, .5, .5, .5]
+  list_r: [.05, .2, .5, 1, 10]
+  size_hidden_layers: 8
+  batchnorm: True
+  res: False
+
+  batch_size: 1
+  nb_epochs: 398
+  lr: 0.001
+  max_neighbors: 64
+  subsampling: 32000
+  r: 0.05
+
+GAT: # Ditambahkan
+  encoder: [7, 64, 64, 8] # Dimensi output encoder
+  decoder: [8, 64, 64, 4] # Dimensi input decoder
+
+  nb_hidden_layers: 3 # Jumlah total GAT layers (in_layer + hidden_layers + out_layer)
+  size_hidden_layers: 16 # Output features per head di GATConv (sebelum dikali jumlah heads)
+  heads: 4 # Jumlah attention heads
+  out_heads: 1 # Jumlah attention heads untuk GAT layer terakhir (jika concat=False, ini akan menjadi out_channels)
+  dropout_gat: 0.6 # Dropout rate untuk attention coefficients dan node features di GATConv
+  
+  batch_size: 1
+  nb_epochs: 398
+  lr: 0.001
+  max_neighbors: 64 # Untuk radius_graph
+  bn_bool: True
+  subsampling: 32000
+  r: 0.05 # Untuk radius_graph
